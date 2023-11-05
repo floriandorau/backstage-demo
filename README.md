@@ -1,6 +1,8 @@
-# [Backstage](https://backstage.io)
+# [backstage-demo](https://backstage.io)
 
-This is your newly scaffolded Backstage App, Good Luck!
+Backstage demo app used to test some capablilites
+
+## Start
 
 To start the app, run:
 
@@ -9,5 +11,7 @@ yarn install
 yarn dev
 ```
 
+### Kubernetes integration
 
+To get Kubernetes integration running please refer to proper `minikube` setup in [backstage-app-deployments](https://github.com/floriandorau/backstage-app-deployments).
 https://github.com/backstage/backstage/tree/master/packages/catalog-model/examples
