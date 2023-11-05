@@ -69,7 +69,11 @@ import {
   EntityGithubPullRequestsContent,
   EntityGithubPullRequestsOverviewCard 
 } from '@roadiehq/backstage-plugin-github-pull-requests';
-
+import { 
+  EntitySecurityInsightsContent,
+  EntitySecurityInsightsCard,
+  isSecurityInsightsAvailable
+} from '@roadiehq/backstage-plugin-security-insights';
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -149,20 +153,26 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
-    
-    <Grid container spacing={3} alignItems="stretch">
-      <EntitySwitch>
-        <EntitySwitch.Case if={e => Boolean(isGithubInsightsAvailable(e))}>
-          <Grid item md={6}>
-            <EntityGithubInsightsLanguagesCard />
-            <EntityGithubInsightsReleasesCard />
-          </Grid>
-          <Grid item md={6}>
-            <EntityGithubInsightsReadmeCard maxHeight={350} />
-          </Grid>
-        </EntitySwitch.Case>
-      </EntitySwitch>
-    </Grid>
+        
+    <EntitySwitch>
+      <EntitySwitch.Case if={e => Boolean(isGithubInsightsAvailable(e))}>
+        <Grid item md={6}>
+          <EntityGithubInsightsLanguagesCard />
+          <EntityGithubInsightsReleasesCard />
+        </Grid>
+        <Grid item md={6}>
+          <EntityGithubInsightsReadmeCard maxHeight={350} />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+        
+    <EntitySwitch>
+      <EntitySwitch.Case if={isSecurityInsightsAvailable}>
+        <Grid item md={6}>
+          <EntitySecurityInsightsCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
 
     <Grid item md={6}>
         <EntityGithubPullRequestsOverviewCard />
@@ -213,6 +223,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route  path="/code-insights" title="Code Insights">
       <EntityGithubInsightsContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/security-insights" title="Security Insights">
+      <EntitySecurityInsightsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/pull-requests" title="Pull Requests">
