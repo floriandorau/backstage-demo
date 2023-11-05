@@ -58,6 +58,13 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 import { EntityKubernetesContent } from '@backstage/plugin-kubernetes';
+import {
+  EntityGithubInsightsContent,
+  EntityGithubInsightsLanguagesCard,
+  EntityGithubInsightsReadmeCard,
+  EntityGithubInsightsReleasesCard,
+  isGithubInsightsAvailable,
+  } from '@roadiehq/backstage-plugin-github-insights';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -138,6 +145,21 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+    
+    <Grid container spacing={3} alignItems="stretch">
+      <EntitySwitch>
+        <EntitySwitch.Case if={e => Boolean(isGithubInsightsAvailable(e))}>
+          <Grid item md={6}>
+            <EntityGithubInsightsLanguagesCard />
+            <EntityGithubInsightsReleasesCard />
+          </Grid>
+          <Grid item md={6}>
+            <EntityGithubInsightsReadmeCard maxHeight={350} />
+          </Grid>
+        </EntitySwitch.Case>
+      </EntitySwitch>
+    </Grid>
+
   </Grid>
 );
 
@@ -179,6 +201,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/kubernetes" title="Kubernetes">
       <EntityKubernetesContent refreshIntervalMs={30000} />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route  path="/code-insights" title="Code Insights">
+      <EntityGithubInsightsContent />
     </EntityLayout.Route>
   </EntityLayout>
 );
