@@ -136,16 +136,11 @@ kubernetes:
   serviceLocatorMethod:
     type: 'multiTenant'
   clusterLocatorMethods:
-    - type: localKubectlProxy
-    # - type: 'config'
-    #   clusters:
-    #     - url: http://127.0.0.1:9999
-    #       name: minikube
-    #       authProvider: 'serviceAccount'
-    #       skipTLSVerify: false
-    #       skipMetricsLookup: true
-    #       serviceAccountToken: ${K8S_MINIKUBE_TOKEN}
-    #       dashboardUrl: http://127.0.0.1:64713 # url copied from running the command: minikube service kubernetes-dashboard -n kubernetes-dashboard
-    #       dashboardApp: standard
-    #       caData: ${K8S_CONFIG_CA_DATA}
-    #       caFile: '' # local path to CA file
+    - type: config
+      clusters:
+        - url: ${BACKSTAGE_K8S_CONTROL_PANE_URL}
+          name: minikube
+          authProvider: serviceAccount
+          skipTLSVerify: true
+          skipMetricsLookup: true
+          serviceAccountToken: ${BACKSTAGE_K8S_SA_TOKEN}
