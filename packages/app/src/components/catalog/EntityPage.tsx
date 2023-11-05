@@ -64,7 +64,11 @@ import {
   EntityGithubInsightsReadmeCard,
   EntityGithubInsightsReleasesCard,
   isGithubInsightsAvailable,
-  } from '@roadiehq/backstage-plugin-github-insights';
+} from '@roadiehq/backstage-plugin-github-insights';
+import { 
+  EntityGithubPullRequestsContent,
+  EntityGithubPullRequestsOverviewCard 
+} from '@roadiehq/backstage-plugin-github-pull-requests';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -160,6 +164,10 @@ const overviewContent = (
       </EntitySwitch>
     </Grid>
 
+    <Grid item md={6}>
+        <EntityGithubPullRequestsOverviewCard />
+    </Grid>
+
   </Grid>
 );
 
@@ -205,6 +213,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route  path="/code-insights" title="Code Insights">
       <EntityGithubInsightsContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
+      <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
   </EntityLayout>
 );
