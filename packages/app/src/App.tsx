@@ -33,6 +33,7 @@ import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
+import { BulletinBoardPage } from 'backstage-plugin-bulletin-board';
 
 const app = createApp({
   apis,
@@ -80,6 +81,8 @@ const routes = (
       path="/tech-radar"
       element={<TechRadarPage width={1500} height={800} />}
     />
+    <Route path="/bulletin-board" element={<BulletinBoardPage />} />
+
     <Route
       path="/catalog-import"
       element={
