@@ -31,7 +31,7 @@ auth:
         clientSecret: <redacted>
 ```
 
-Make sure you have working Github personal access token and Github OAuth app `clientId` and `clientSecret`. 
+Make sure you have working Github personal access token and Github OAuth app `clientId` and `clientSecret`.
 
 ## Start
 
